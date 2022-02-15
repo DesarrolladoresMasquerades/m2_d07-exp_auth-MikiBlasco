@@ -9,10 +9,10 @@ const saltRounds = 10;
 
 const User = require("../models/User.model");
 
-const { checkAnon, checkLogin } = require("../middlewares/auth.middleware");
+const { checkAnon, checkLogin } = require("../middlewares/auth.middlewares");
 
 // GET route ==> to display the signup form to users
-router.get("/signup", (req, res) => res.render("auth/signup"));
+router.get("/signup",(req, res) => res.render("auth/signup"));
 
 // POST route ==> to process form data
 router.post("/signup", (req, res, next) => {
@@ -108,6 +108,7 @@ router.post("/login", checkAnon, (req, res, next) => {
 
         //******* SAVE THE USER IN THE SESSION ********//
         req.session.currentUserId = user._id;
+        req.session.currentUser = user;
         res.redirect("/userProfile");
       } else {
         // if the two passwords DON'T match, render the login form again
