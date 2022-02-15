@@ -20,7 +20,7 @@ router
     const imgUrl = req.file.path;
 
     UserModel.findByIdAndUpdate(id, { username, imgUrl }, { new: true }).then(
-      (user) => res.render("/users/user-profile", { userInSession: user })
+      (user) => res.render("users/user-profile", { userInSession: user })
     );
   });
 
